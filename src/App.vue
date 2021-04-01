@@ -1,28 +1,32 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <PageHeader />
+    <UiContainer />
+    <TabMenu />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import PageHeader from './components/PageHeader.vue'
+import TabMenu from './components/TabMenu.vue'
+import UiContainer from './components/UiContainer.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    PageHeader,
+    TabMenu,
+    UiContainer
   }
 }
 </script>
 
-<style>
+<style >
+body {
+  margin: 0px;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  font-family: 'Frutiger Next LT W1G', Calibri, Arial, Helvetica, sans-serif;
+  min-height: 100%;
 }
 </style>

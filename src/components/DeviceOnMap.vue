@@ -1,11 +1,11 @@
 <template>
-    <div ref="draggableContainer" id="draggable-device" :style="style">
-        <div id="draggable-device-header" @mousedown="dragMouseDown" v-on:click="isShow=!isShow">
-            <img :src = "require(`../assets/iot-devices/${pic_url}`)">
-            <span class="name">{{name}}</span>
-        </div>
-        <MiniMenu v-if= "isShow" @deleteDevice= "handleEvent"></MiniMenu>
+  <div ref="draggableContainer" id="draggable-device" :style="style">
+    <div id="draggable-device-header" @mousedown="dragMouseDown" v-on:dblclick="isShow=!isShow">
+      <img :src = "require(`../assets/iot-devices/${pic_url}`)">
+      <span class="name">{{name}}</span>
     </div>
+    <MiniMenu v-if= "isShow" @deleteDevice= "handleEvent"></MiniMenu>
+  </div>
 </template>
 <script>
 import MiniMenu from './MiniMenu.vue'
@@ -14,30 +14,31 @@ export default {
   props: {
     pic_url: String,
     name: String,
+    status: Boolean,
     positionX: String,
     positionY: String
   },
   data() {
     return {
-      isShow:false,
-      positions: {
-        clientX: undefined,
-        clientY: undefined,
-        movementX: 0,
-        movementY: 0
-      }
+    isShow:false,
+    positions: {
+      clientX: undefined,
+      clientY: undefined,
+      movementX: 0,
+      movementY: 0
+    }
     }
   },
   components:{
     MiniMenu
   },
   computed: {
-      style () {
-          return {
-              'left' : this.positionX,
-              'top' : this.positionY
-          }
+    style () {
+      return {
+        'left' : this.positionX,
+        'top' : this.positionY
       }
+    }
   },
   methods: {
     dragMouseDown: function (event) {
@@ -71,28 +72,28 @@ export default {
 
 <style>
 #draggable-device {
-    position: absolute;
-    z-index: 9;
-    width: 100px;
-    height: 100px;
+  position: absolute;
+  z-index: 9;
+  width: 100px;
+  height: 100px;
 }
 #draggable-device-header {
-    z-index: 10;
+  z-index: 10;
 }
 #draggable-device #draggable-device-header img {
-    position: relative;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 50px;
-    height: 50px;
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 50px;
+  height: 50px;
 }
 #draggable-device #draggable-device-header .name {
-    margin-top: 2px;
-    display: block;
-    text-align: center;
-    color: black;
+  margin-top: 2px;
+  display: block;
+  text-align: center;
+  color: black;
 }
 </style>

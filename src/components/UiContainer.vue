@@ -13,8 +13,10 @@
 </template>
 
 <script>
-import DeviceOnMap from './DeviceOnMap.vue'
+import {HTTP} from './http-common';
+import DeviceOnMap from './DeviceOnMap.vue';
 import { EventBus } from './event-bus.js';
+
 export default {
     data() {
         return {
@@ -23,7 +25,8 @@ export default {
             new_device_url: '',
             new_device_name:'',
             devices: [],
-            next_device_id: 1
+            next_device_id: 1,
+            
         }
     },
     props:{
@@ -45,30 +48,68 @@ export default {
                 this.next_device_id++
                 this.new_device_url=''
                 this.new_device_name=''
-                // console.log(ev)
-                // var device = document.createElement("img")
-                // console.log(device)
-                // device.src = this.device_url
-                // device.style.position="absolute"
-                // device.style.left = ev.clientX - 25 + "px"
-                // device.style.top = ev.clientY - 25 + "px"
-                // device.style.height = "50px"
-                // device.style.width = "50px"
-                // device.dra
-                // ev.target.appendChild(device)
-                // this.device_url = ''
+                
             }
         },
         
         
     },
+    created() {
+        // const headers = { 
+        //     "Authorization": "Bearer oh.test.PgGrq56Et45iSxmZ3546lpi7BQbSiJC3HX8kBVjtVCBJ0AaYc26FAEaOaBpkaQHQm6jKLPqWoBZhmkPUm8w",
+        //     "Content-Type": "text/plain",
+        //     "Access-Control-Allow-Origin": "*"
+        // };
+        const headers_json = {
+            "Authorization": "Bearer oh.test.PgGrq56Et45iSxmZ3546lpi7BQbSiJC3HX8kBVjtVCBJ0AaYc26FAEaOaBpkaQHQm6jKLPqWoBZhmkPUm8w",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+        }
+        HTTP.get(`sitemaps`).then(response=> {
+            console.log(response.data)
+            this.data = response.data[0].label
+            console.log(this.data)
+            }).catch(err => {
+            console.log(err.response);
+        });
+        HTTP.get(`items`).then(response=> {
+            console.log(response.data)
+            this.data = response.data[0].label
+            console.log(this.data)
+            }).catch(err => {
+            console.log(err.response);
+        });
+        console.log(this.devices)
+        var item = {
+            "type": "Switch",
+            "name": "test1",
+            "label": "test1",
+            "category": "",
+            "tags": [
+            "House"
+            ],
+            "groupNames": [
+            ""
+            ],
+            "groupType": "",
+            "function": {
+                "name": "string",
+                "params": [
+                    "string"
+                ]
+            }
+        }
+        // HTTP.post(`items/NewItem`, 'ON', {headers:headers}).then()
+        HTTP.get(`items/NewItem/state`).then(response=> {
+            console.log(response.data)
+        })
+        HTTP.put(`items/test1`,item,{headers:headers_json}).then()
+    },
     mounted() {
         EventBus.$on("img-upload",url => {
-            console.log(url)
             this.background_url = url
         })
         EventBus.$on("device-data", (data_url,data_name)=>{
-            console.log(data_url)
             this.new_device_url = data_url
             this.new_device_name = data_name
         })
@@ -78,7 +119,7 @@ export default {
 
 <style scoped>
 .ui-container {
-    float: right!important;;
+    float: right;
     background-color: #F1F3F8;
     width: 1845px;
     height: 897px;

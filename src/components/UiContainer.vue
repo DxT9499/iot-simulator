@@ -50,6 +50,7 @@ export default {
                 this.new_device_name=''
                 
             }
+
         },
         
         
@@ -60,26 +61,26 @@ export default {
         //     "Content-Type": "text/plain",
         //     "Access-Control-Allow-Origin": "*"
         // };
-        const headers_json = {
-            "Authorization": "Bearer oh.test.PgGrq56Et45iSxmZ3546lpi7BQbSiJC3HX8kBVjtVCBJ0AaYc26FAEaOaBpkaQHQm6jKLPqWoBZhmkPUm8w",
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*"
-        }
-        HTTP.get(`sitemaps`).then(response=> {
-            console.log(response.data)
-            this.data = response.data[0].label
-            console.log(this.data)
-            }).catch(err => {
-            console.log(err.response);
-        });
-        HTTP.get(`items`).then(response=> {
-            console.log(response.data)
-            this.data = response.data[0].label
-            console.log(this.data)
-            }).catch(err => {
-            console.log(err.response);
-        });
-        console.log(this.devices)
+        // const headers_json = {
+        //     "Authorization": "Bearer oh.test.PgGrq56Et45iSxmZ3546lpi7BQbSiJC3HX8kBVjtVCBJ0AaYc26FAEaOaBpkaQHQm6jKLPqWoBZhmkPUm8w",
+        //     "Content-Type": "application/json",
+        //     "Access-Control-Allow-Origin": "*"
+        // }
+        // HTTP.get(`sitemaps`).then(response=> {
+        //     console.log(response.data)
+        //     this.data = response.data[0].label
+        //     console.log(this.data)
+        //     }).catch(err => {
+        //     console.log(err.response);
+        // });
+        // HTTP.get(`items`).then(response=> {
+        //     console.log(response.data)
+        //     this.data = response.data[0].label
+        //     console.log(this.data)
+        //     }).catch(err => {
+        //     console.log(err.response);
+        // });
+        // console.log(this.devices)
         var item = {
             "type": "Switch",
             "name": "test1",
@@ -99,11 +100,13 @@ export default {
                 ]
             }
         }
-        // HTTP.post(`items/NewItem`, 'ON', {headers:headers}).then()
-        HTTP.get(`items/NewItem/state`).then(response=> {
+        // // HTTP.post(`items/NewItem`, 'ON', {headers:headers}).then()
+        // HTTP.get(`items/NewItem/state`).then(response=> {
+        //     console.log(response.data)
+        // })
+        HTTP.put(`items/test1`,item).then(response=>{
             console.log(response.data)
         })
-        HTTP.put(`items/test1`,item,{headers:headers_json}).then()
     },
     mounted() {
         EventBus.$on("img-upload",url => {

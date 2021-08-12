@@ -18,7 +18,7 @@ export default {
 
     methods:{
         loadFile(event) {
-            console.log(event);
+            
             this.url = URL.createObjectURL(event.target.files[0]);
             EventBus.$emit("img-upload",this.url );
         }

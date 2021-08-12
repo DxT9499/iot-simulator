@@ -1,11 +1,22 @@
 import axios from 'axios';
+import { EventBus } from './event-bus.js'
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
-export const HTTP = axios.create({
-  baseURL: `http://localhost:8080/rest/`,
-  headers: {
-    Authorization: "Bearer oh.test.PgGrq56Et45iSxmZ3546lpi7BQbSiJC3HX8kBVjtVCBJ0AaYc26FAEaOaBpkaQHQm6jKLPqWoBZhmkPUm8w",
-    ContentType: "application/json",
-    AccessControlAllowOrigin: "*"
-  }
-})
+
+export function config() {
+    var base_url = ``
+    var api_token = "Bearer "
+    EventBus.$on("connect-data", (data_url, data_token) => {
+        base_url = data_url + `/rest/`
+        api_token = "Bearer " + data_token
+        console.log(base_url, api_token)
+        return axios.create({
+            baseURL: base_url,
+            headers: {
+                Authorization: api_token,
+                ContentType: "application/json",
+                AccessControlAllowOrigin: "*"
+            },
+        })
+    })
+}

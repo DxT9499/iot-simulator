@@ -12,6 +12,7 @@
         <div class="device-type">         
             <span class = "title">Door and window</span>
             <io-t-device pic_url = "dooropen.png" name="Door"></io-t-device>
+            <io-t-device pic_url = "window.png" name="Window"></io-t-device>
             <io-t-device pic_url = "curtains.png" name="Curtain"></io-t-device>
         </div>
         <div class="device-type">         
@@ -19,6 +20,8 @@
             <io-t-device pic_url = "coffemaker.png" name="Coffee Maker"></io-t-device>
             <io-t-device pic_url = "thermometer.png" name="Thermometer"></io-t-device>
             <io-t-device pic_url = "oven.png" name="Oven"></io-t-device>
+            <io-t-device pic_url = "light.png" name="Light"></io-t-device>
+            <io-t-device pic_url = "aircondition.png" name="Air Condition"></io-t-device>
         </div> 
     </div>
 </template>
@@ -27,6 +30,7 @@
 import IoTDevice from './IoTDevice.vue'
 import CommonButton from './CommonButton.vue'
 
+
 export default {
     props: {
 
@@ -34,7 +38,7 @@ export default {
     
     components:{
         IoTDevice,
-        CommonButton
+        CommonButton,
     }
 }
 </script>
@@ -49,6 +53,7 @@ export default {
     margin-top: 0px;
     margin-left: 60px;
     width: fit-content;
+    max-width: 340px;
     height: 897px;
     font : inherit;
 }

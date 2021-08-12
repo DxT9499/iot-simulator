@@ -18,7 +18,6 @@ export default ({
     methods: {
         getDevice(){
             EventBus.$emit("device-data",this.pic_url,this.name);
-            console.log();
         }
     }
 })

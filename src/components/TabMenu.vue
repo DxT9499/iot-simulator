@@ -1,12 +1,12 @@
 <template>
     <div>
         <div class="tab-menu">
-            <button class="tablinks active" v-on:click="isShow = !isShow">Create</button>
-            <button class="tablinks" >2</button>
-            <button class="tablinks" >3</button>
-            <button class="tablinks" >4</button>
+            <button class="tablinks active" v-on:click= "isShow = !isShow">Create</button>
+            <button class="tablinks" >Other</button>
+            <button class="tablinks" >Other</button>
+            <button class="tablinks" >Other</button>
         </div>
-        <TabContent v-if = 'isShow'/>
+        <TabContent v-if = "isShow"/>
     </div>
 </template>
 
